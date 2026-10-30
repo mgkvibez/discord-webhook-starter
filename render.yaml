@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: discord-webhook-starter
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DISCORD_PUBLIC_KEY
+        sync: false
+      - key: DISCORD_APPLICATION_ID
+        sync: false
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.12.6
